@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  {{- if .Values.service.peering.annotations }}
+  annotations:
+    {{ toYaml .Values.service.peering.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ include "erigon.fullname" . }}-peering
+  labels:
+    {{- include "erigon.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.peering.type }}
+  publishNotReadyAddresses: true
+  ports:
+    - port: {{ .Values.service.peering.port }}
+      name: port-tcp
+      targetPort: port-tcp
+      protocol: TCP
+    - port: {{ .Values.service.peering.port }}
+      name: port-udp
+      targetPort: port-udp
+      protocol: UDP
+    - port: {{ .Values.service.peering.portEth65 }}
+      name: eth65-tcp
+      targetPort: eth65-tcp
+      protocol: TCP
+    - port: {{ .Values.service.peering.portEth65 }}
+      name: eth65-udp
+      targetPort: eth65-udp
+      protocol: UDP
+  selector:
+    {{- include "erigon.selectorLabels" . | nindent 4 }}

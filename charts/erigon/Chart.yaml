@@ -1,0 +1,11 @@
+apiVersion: v2
+name: erigon
+description: A Helm chart for Erigon Ethereum 1 client
+sources:
+  - https://github.com/ledgerwatch/erigon
+type: application
+version: 1.0.0
+appVersion: "v2021.09.02"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh

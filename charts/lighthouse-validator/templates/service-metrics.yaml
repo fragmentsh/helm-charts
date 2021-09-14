@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "lighthouse-validator.fullname" . }}-metrics
+  labels:
+    {{- include "lighthouse-validator.labels" . | nindent 4 }}
+spec:
+  publishNotReadyAddresses: true
+  ports:
+    - port: 5064
+      name: metrics
+      targetPort: metrics
+      protocol: TCP
+  selector:
+    {{- include "lighthouse-validator.selectorLabels" . | nindent 4 }}

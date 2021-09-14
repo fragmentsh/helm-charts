@@ -1,0 +1,11 @@
+apiVersion: v2
+name: lighthouse-validator
+description: A Helm chart for Lighthouse Ethereum 2 validator client
+sources:
+  - https://github.com/sigp/lighthouse
+type: application
+version: 1.0.0
+appVersion: "v1.5.2"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh

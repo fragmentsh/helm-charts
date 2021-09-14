@@ -1,0 +1,11 @@
+apiVersion: v2
+name: ssv-node
+description: A Helm chart for Kubernetes
+sources:
+  - https://github.com/bloxapp/ssv
+type: application
+version: 1.0.0
+appVersion: "v0.0.18"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh
