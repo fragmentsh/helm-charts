@@ -1,2 +1,99 @@
 apiVersion: v1
-entries: {}
+entries:
+  erigon:
+  - apiVersion: v2
+    appVersion: v2021.09.02
+    created: "2021-09-14T23:41:03.253163618+02:00"
+    description: A Helm chart for Erigon Ethereum 1 client
+    digest: 05bfc322af1319d83e09f119dec27b67598924a4847011f7385a39e881deca85
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: erigon
+    sources:
+    - https://github.com/ledgerwatch/erigon
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-erigon-1.0.0/erigon-1.0.0.tgz
+    version: 1.0.0
+  geth:
+  - apiVersion: v2
+    appVersion: alltools-v1.10.8
+    created: "2021-09-14T23:41:03.276907307+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 93c63a598821a229d1c3b1ed9a01c8a68b2cb6965e078e11aa0e10f9e01e373b
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: geth
+    sources:
+    - https://geth.ethereum.org/downloads/
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-geth-1.0.0/geth-1.0.0.tgz
+    version: 1.0.0
+  lighthouse-beacon:
+  - apiVersion: v2
+    appVersion: v1.5.2
+    created: "2021-09-14T23:41:03.301698166+02:00"
+    description: A Helm chart for Lighthouse Ethereum 2 beacon chain client
+    digest: 3acb8a10e364446f81910e05603be4ad436f06c2e414476face396795620257b
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: lighthouse-beacon
+    sources:
+    - https://github.com/sigp/lighthouse
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-lighthouse-beacon-1.0.0/lighthouse-beacon-1.0.0.tgz
+    version: 1.0.0
+  lighthouse-validator:
+  - apiVersion: v2
+    appVersion: v1.5.2
+    created: "2021-09-14T23:41:03.322822021+02:00"
+    description: A Helm chart for Lighthouse Ethereum 2 validator client
+    digest: af2e327eb4744bb7907d167928ad9adc40741c49b050215d0c72f28f04dd11f7
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: lighthouse-validator
+    sources:
+    - https://github.com/sigp/lighthouse
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-lighthouse-validator-1.0.0/lighthouse-validator-1.0.0.tgz
+    version: 1.0.0
+  nethermind:
+  - apiVersion: v2
+    appVersion: 1.11.2
+    created: "2021-09-14T23:41:03.347069817+02:00"
+    description: A Helm chart for Nethermind Ethereum 1 client
+    digest: b2c536fca5eed1ea4b47ce1ea8daa499babc2e06121d02685955daccd068de61
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: nethermind
+    sources:
+    - https://github.com/NethermindEth/nethermind
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-nethermind-1.0.0/nethermind-1.0.0.tgz
+    version: 1.0.0
+  ssv-node:
+  - apiVersion: v2
+    appVersion: v0.0.18
+    created: "2021-09-14T23:41:03.370319961+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 7e692b2d2a088c67e2cb70fc7e8c9602a218f6ce2f8c84051e921cba12b22bf3
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: ssv-node
+    sources:
+    - https://github.com/bloxapp/ssv
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.0.1/ssv-node-1.0.1.tgz
+    version: 1.0.1
+generated: "2021-09-14T23:41:03.370341908+02:00"
