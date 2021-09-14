@@ -1,0 +1,33 @@
+extraArgs:
+  network: prater
+  beacon-nodes: http://prater-lighthouse-beacon-rpc.ethereum:5052
+
+persistence:
+  size: 1Gi
+
+nodeSelector:
+  arch: amd64
+  size: micro
+  network: public
+
+tolerations:
+  - key: "dedicated"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+
+resources:
+   requests:
+     cpu: 50m
+     memory: 64Mi
+
+init:
+  enabled: true
+  type: secretsmanager
+  secretsmanager:
+    secretIds:
+      - /ethereum/prater/keys/889e0033111254d51039ac8e0a005bdd2d4812eedd2649b53d311fb01520b9311b8ddc816995a67ce61ce09e49ef6cc4
+
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::128478261352:role/ethereum-prater"
