@@ -4,7 +4,7 @@ description: A Helm chart for Nethermind Ethereum 1 client
 sources:
   - https://github.com/NethermindEth/nethermind
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "1.11.2"
 maintainers:
   - name: fragment
