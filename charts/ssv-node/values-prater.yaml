@@ -1,49 +1,13 @@
-replicaCount: 2
+replicaCount: 1
 
 fullnameOverride: node
 
 persistence:
   size: 5Gi
 
-nodeSelector:
-  size: micro
-  network: public
-  arch: amd64
-
-tolerations:
-  - key: "dedicated"
-    operator: "Equal"
-    value: "true"
-    effect: "NoSchedule"
-
-resources:
-   requests:
-     cpu: 400m
-     memory: 500Mi
-
 config:
   eth2:
-    BeaconNodeAddr: "https://1pl4OI3LFPHVOmIc7JJ6zRHKTpO:1a23f9bde9eac64980b0103797d70384@eth2-beacon-prater.infura.io"
-    #BeaconNodeAddr: "http://prater-lighthouse-beacon-rpc.ethereum:5052"
+    BeaconNodeAddr: "http://prater-lighthouse-beacon-rpc.ethereum:5052"
   eth1:
     ETH1Addr: ws://goerli-geth-rpc.ethereum:8546
     RegistryContractAddr: 0x687fb596F3892904F879118e2113e1EEe8746C2E
-
-serviceAccount:
-  annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::128478261352:role/ssv-secrets"
-
-extraVolumes:
-  - name: secrets-store-inline
-    csi:
-      driver: secrets-store.csi.k8s.io
-      readOnly: true
-      volumeAttributes:
-        secretProviderClass: "ssv-secrets"
-
-extraEnvs:
-  - name: OPERATOR_KEY
-    valueFrom:
-      secretKeyRef:
-          name: ssv-secrets
-          key: operator_key
