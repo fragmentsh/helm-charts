@@ -1,8 +1,18 @@
 # erigon
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2021.09.01](https://img.shields.io/badge/AppVersion-v2021.09.01-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2021.09.02](https://img.shields.io/badge/AppVersion-v2021.09.02-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+A Helm chart for Erigon Ethereum 1 client
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| fragment | contact@fragment.sh |  |
+
+## Source Code
+
+* <https://github.com/ledgerwatch/erigon>
 
 ## Values
 
@@ -43,7 +53,7 @@ A Helm chart for Kubernetes
 | nodeSelector | object | `{}` |  |
 | persistence.accessMode | string | `"ReadWriteOnce"` |  |
 | persistence.enabled | bool | `true` |  |
-| persistence.size | string | `"2Ti"` |  |
+| persistence.size | string | `"1Ti"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext.fsGroup | int | `1000` |  |
 | podSecurityContext.runAsGroup | int | `1000` |  |
@@ -67,7 +77,7 @@ A Helm chart for Kubernetes
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
 | serviceMonitor.additionalLabels | object | `{}` |  |
-| serviceMonitor.enabled | bool | `true` |  |
+| serviceMonitor.enabled | bool | `false` |  |
 | serviceMonitor.metricRelabelings | list | `[]` |  |
 | serviceMonitor.namespace | string | `""` |  |
 | serviceMonitor.namespaceSelector | object | `{}` |  |
