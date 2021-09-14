@@ -67,6 +67,21 @@ entries:
   nethermind:
   - apiVersion: v2
     appVersion: 1.11.2
+    created: "2021-09-14T21:48:33.132321248Z"
+    description: A Helm chart for Nethermind Ethereum 1 client
+    digest: a47c583c6e14f253ae7797911eb63afd9399e28ed84caa672e946221a1d75a05
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: nethermind
+    sources:
+    - https://github.com/NethermindEth/nethermind
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-nethermind-1.0.1/nethermind-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.11.2
     created: "2021-09-14T23:41:03.347069817+02:00"
     description: A Helm chart for Nethermind Ethereum 1 client
     digest: b2c536fca5eed1ea4b47ce1ea8daa499babc2e06121d02685955daccd068de61
@@ -96,4 +111,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.0.1/ssv-node-1.0.1.tgz
     version: 1.0.1
-generated: "2021-09-14T23:41:03.370341908+02:00"
+generated: "2021-09-14T21:48:33.132329548Z"
