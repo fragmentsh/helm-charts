@@ -6,3 +6,6 @@ sources:
 type: application
 version: 1.0.0
 appVersion: "v1.5.2"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh

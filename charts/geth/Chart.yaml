@@ -6,3 +6,6 @@ sources:
 type: application
 version: 1.0.0
 appVersion: "alltools-v1.10.8"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh

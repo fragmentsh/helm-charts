@@ -68,7 +68,7 @@ defaultArgs:
   ws.addr: 0.0.0.0
   ws.api: "eth,net,web3"
   ws.origins: '*'
-  #config: "/shared/config.toml"
+  # config: "/shared/config.toml"
 
 extraArgs: {}
 
