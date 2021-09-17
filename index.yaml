@@ -51,6 +51,21 @@ entries:
   lighthouse-validator:
   - apiVersion: v2
     appVersion: v1.5.2
+    created: "2021-09-17T21:07:09.201073021Z"
+    description: A Helm chart for Lighthouse Ethereum 2 validator client
+    digest: 6a32b90770dad3891d45af80911736901d4e36d384f25649fd0cab4a7152f99a
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: lighthouse-validator
+    sources:
+    - https://github.com/sigp/lighthouse
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-lighthouse-validator-1.0.1/lighthouse-validator-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: v1.5.2
     created: "2021-09-14T23:41:03.322822021+02:00"
     description: A Helm chart for Lighthouse Ethereum 2 validator client
     digest: af2e327eb4744bb7907d167928ad9adc40741c49b050215d0c72f28f04dd11f7
@@ -111,4 +126,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.0.1/ssv-node-1.0.1.tgz
     version: 1.0.1
-generated: "2021-09-14T21:48:33.132329548Z"
+generated: "2021-09-17T21:07:09.201083421Z"
