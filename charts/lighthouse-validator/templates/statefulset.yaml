@@ -46,6 +46,8 @@ spec:
           command:
             - /init/init.sh
           volumeMounts:
+            - mountPath: {{ .Values.config.datadir }}
+              name: data
             - mountPath: /keys
               name: keys
             - mountPath: /secrets
