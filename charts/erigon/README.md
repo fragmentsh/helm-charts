@@ -1,6 +1,6 @@
 # erigon
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2021.09.02](https://img.shields.io/badge/AppVersion-v2021.09.02-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2021.09.03](https://img.shields.io/badge/AppVersion-v2021.09.03-informational?style=flat-square)
 
 A Helm chart for Erigon Ethereum 1 client
 
@@ -24,15 +24,14 @@ A Helm chart for Erigon Ethereum 1 client
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
-| erigon.defaultArgs."metrics.addr" | string | `"0.0.0.0"` |  |
-| erigon.defaultArgs."metrics.port" | int | `6060` |  |
-| erigon.defaultArgs."pprof.addr" | string | `"0.0.0.0"` |  |
-| erigon.defaultArgs."pprof.port" | int | `6061` |  |
-| erigon.defaultArgs."private.api.addr" | string | `"0.0.0.0:9090"` |  |
-| erigon.defaultArgs.datadir | string | `"/home/erigon/.local/share/erigon"` |  |
-| erigon.defaultArgs.metrics | string | `""` |  |
-| erigon.defaultArgs.pprof | string | `""` |  |
-| erigon.defaultArgs.prune | string | `"htc"` |  |
+| erigon.datadir | string | `"/home/erigon/.local/share/erigon"` |  |
+| erigon.defaultArgs[0] | string | `"--metrics"` |  |
+| erigon.defaultArgs[1] | string | `"--metrics.addr=0.0.0.0"` |  |
+| erigon.defaultArgs[2] | string | `"--metrics.port=6060"` |  |
+| erigon.defaultArgs[3] | string | `"--private.api.addr=0.0.0.0:9090"` |  |
+| erigon.defaultArgs[4] | string | `"--pprof"` |  |
+| erigon.defaultArgs[5] | string | `"--pprof.addr=0.0.0.0"` |  |
+| erigon.defaultArgs[6] | string | `"--pprof.port=6061"` |  |
 | erigon.enabled | bool | `true` |  |
 | erigon.extraArgs | object | `{}` |  |
 | erigon.resources | object | `{}` |  |
@@ -55,24 +54,22 @@ A Helm chart for Erigon Ethereum 1 client
 | persistence.enabled | bool | `true` |  |
 | persistence.size | string | `"1Ti"` |  |
 | podAnnotations | object | `{}` |  |
-| podSecurityContext.fsGroup | int | `1000` |  |
-| podSecurityContext.runAsGroup | int | `1000` |  |
-| podSecurityContext.runAsUser | int | `1000` |  |
+| podSecurityContext.fsGroup | int | `0` |  |
+| podSecurityContext.runAsGroup | int | `0` |  |
+| podSecurityContext.runAsUser | int | `0` |  |
 | replicaCount | int | `1` |  |
-| rpcdaemon.defaultArgs."http.addr" | string | `"0.0.0.0"` |  |
-| rpcdaemon.defaultArgs."http.api" | string | `"eth,erigon,net,web3"` |  |
-| rpcdaemon.defaultArgs."http.corsdomain" | string | `"*"` |  |
-| rpcdaemon.defaultArgs."http.vhosts" | string | `"*"` |  |
-| rpcdaemon.defaultArgs."private.api.addr" | string | `"localhost:9090"` |  |
-| rpcdaemon.defaultArgs.datadir | string | `"/home/erigon/.local/share/erigon"` |  |
+| rpcdaemon.defaultArgs[0] | string | `"--private.api.addr=localhost:9090"` |  |
+| rpcdaemon.defaultArgs[1] | string | `"--http.addr=0.0.0.0"` |  |
+| rpcdaemon.defaultArgs[2] | string | `"--http.corsdomain=\"*\""` |  |
+| rpcdaemon.defaultArgs[3] | string | `"--http.vhosts=\"*\""` |  |
+| rpcdaemon.defaultArgs[4] | string | `"--http.api=\"eth,erigon,net,web3\""` |  |
 | rpcdaemon.enabled | bool | `true` |  |
 | rpcdaemon.extraArgs | object | `{}` |  |
 | rpcdaemon.resources | object | `{}` |  |
 | rpcdaemon.securityContext | string | `nil` |  |
-| service.peering.port | int | `30303` |  |
-| service.peering.portEth65 | int | `30304` |  |
-| service.peering.type | string | `"ClusterIP"` |  |
-| service.rpc.port | int | `8545` |  |
+| service.p2p.enableHostPort | bool | `true` |  |
+| service.p2p.port | int | `30303` |  |
+| service.p2p.portEth65 | int | `30304` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |

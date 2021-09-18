@@ -7,7 +7,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.service.rpc.port }}
+    - port: 8545
       name: rpc
       targetPort: rpc
       protocol: TCP

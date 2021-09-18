@@ -26,12 +26,26 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext:
-  runAsUser: 1000
-  runAsGroup: 1000
-  fsGroup: 1000
+  runAsUser: 0
+  runAsGroup: 0
+  fsGroup: 0
 
 erigon:
+
   enabled: true
+
+  datadir: /home/erigon/.local/share/erigon
+
+  defaultArgs:
+    - --metrics
+    - --metrics.addr=0.0.0.0
+    - --metrics.port=6060
+    - --private.api.addr=0.0.0.0:9090
+    - --pprof
+    - --pprof.addr=0.0.0.0
+    - --pprof.port=6061
+
+  extraArgs: {}
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -53,21 +67,19 @@ erigon:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-  defaultArgs:
-    datadir: /home/erigon/.local/share/erigon
-    metrics: ""
-    metrics.addr: 0.0.0.0
-    metrics.port: 6060
-    private.api.addr: 0.0.0.0:9090
-    pprof: ""
-    pprof.addr: 0.0.0.0
-    pprof.port: 6061
-    prune: "htc"
-
-  extraArgs: {}
 
 rpcdaemon:
+
   enabled: true
+
+  defaultArgs:
+    - --private.api.addr=localhost:9090
+    - --http.addr=0.0.0.0
+    - --http.corsdomain="*"
+    - --http.vhosts="*"
+    - --http.api="eth,erigon,net,web3"
+
+  extraArgs: {}
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -89,23 +101,11 @@ rpcdaemon:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-  defaultArgs:
-    datadir: /home/erigon/.local/share/erigon
-    private.api.addr: localhost:9090
-    http.addr: 0.0.0.0
-    http.corsdomain: "*"
-    http.vhosts: "*"
-    http.api: "eth,erigon,net,web3"
-
-  extraArgs: {}
-
 service:
-  peering:
-    type: ClusterIP
+  p2p:
+    enableHostPort: true
     port: 30303
     portEth65: 30304
-  rpc:
-    port: 8545
 
 ingress:
   enabled: false

@@ -40,19 +40,15 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-          - mountPath: {{ .Values.erigon.defaultArgs.datadir }}
-            name: erigon-data-dir
+            - mountPath: {{ .Values.erigon.datadir }}
+              name: data
           command:
             - erigon
           args:
-          {{- range $key, $value := .Values.erigon.defaultArgs }}
-            {{- /* Accept keys without values or with false as value */}}
-            {{- if eq ($value | quote | len) 2 }}
-            - --{{ $key }}
-            {{- else }}
-            - --{{ $key }}={{ $value }}
-            {{- end }}
-          {{- end }}
+            - --datadir={{ .Values.erigon.datadir }}
+            - --port={{ .Values.service.p2p.port }}
+            - --p2p.eth65.port={{ .Values.service.p2p.portEth65 }}
+            {{- toYaml .Values.erigon.defaultArgs | nindent 12 }}
           {{- range $key, $value := .Values.erigon.extraArgs }}
             {{- /* Accept keys without values or with false as value */}}
             {{- if eq ($value | quote | len) 2 }}
@@ -62,18 +58,30 @@ spec:
             {{- end }}
           {{- end }}
           ports:
-            - name: port-tcp
-              containerPort: 30303
+            - name: p2p-tcp
+              containerPort: {{ .Values.service.p2p.port }}
               protocol: TCP
-            - name: port-udp
-              containerPort: 30303
-              protocol: TCP
-            - name: eth65-tcp
-              containerPort: 30304
-              protocol: TCP
-            - name: eth65-udp
-              containerPort: 30304
+            {{- if .Values.service.p2p.enableHostPort }}
+              hostPort: {{ .Values.service.p2p.port }}
+            {{- end }}
+            - name: p2p-udp
+              containerPort: {{ .Values.service.p2p.port }}
               protocol: UDP
+            {{- if .Values.service.p2p.enableHostPort }}
+              hostPort: {{ .Values.service.p2p.port }}
+            {{- end }}
+            - name: p2p-eth65-tcp
+              containerPort: {{ .Values.service.p2p.portEth65 }}
+              protocol: TCP
+            {{- if .Values.service.p2p.enableHostPort }}
+              hostPort: {{ .Values.service.p2p.portEth65 }}
+            {{- end }}
+            - name: p2p-eth65-udp
+              containerPort: {{ .Values.service.p2p.portEth65 }}
+              protocol: UDP
+            {{- if .Values.service.p2p.enableHostPort }}
+              hostPort: {{ .Values.service.p2p.portEth65 }}
+            {{- end }}
             - name: metrics
               containerPort: 6060
             - name: pprof
@@ -89,20 +97,18 @@ spec:
             {{- toYaml .Values.rpcdaemon.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.erigon.enabled }}
           volumeMounts:
-          - mountPath: {{ .Values.rpcdaemon.defaultArgs.datadir }}
-            name: erigon-data-dir
+            - mountPath: {{ .Values.erigon.datadir }}
+              name: data
+          {{- end }}
           command:
             - rpcdaemon
           args:
-          {{- range $key, $value := .Values.rpcdaemon.defaultArgs }}
-            {{- /* Accept keys without values or with false as value */}}
-            {{- if eq ($value | quote | len) 2 }}
-            - --{{ $key }}
-            {{- else }}
-            - --{{ $key }}={{ $value }}
-            {{- end }}
+          {{- if .Values.erigon.enabled }}
+            - --datadir={{ .Values.erigon.datadir }}
           {{- end }}
+            {{- toYaml .Values.erigon.defaultArgs | nindent 12 }}
           {{- range $key, $value := .Values.rpcdaemon.extraArgs }}
             {{- /* Accept keys without values or with false as value */}}
             {{- if eq ($value | quote | len) 2 }}
@@ -130,6 +136,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- if .Values.erigon.enabled }}
   {{- if not .Values.persistence.enabled }}
       volumes:
         - name: data
@@ -144,7 +151,7 @@ spec:
   {{- else }}
   volumeClaimTemplates:
     - metadata:
-        name: erigon-data-dir
+        name: data
         labels:
           {{- include "erigon.selectorLabels" . | nindent 10 }}
       spec:
@@ -161,3 +168,4 @@ spec:
         {{- end }}
         {{- end }}
   {{- end }}
+{{- end }}
