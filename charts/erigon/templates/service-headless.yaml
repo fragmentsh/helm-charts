@@ -8,7 +8,7 @@ spec:
   type: ClusterIP
   clusterIP: None
   ports:
-    - port: {{ .Values.service.rpc.port }}
+    - port: 8545
       name: rpc
       targetPort: rpc
       protocol: TCP

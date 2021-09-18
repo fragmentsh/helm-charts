@@ -1,0 +1,3 @@
+erigon:
+  extraArgs:
+    prune: "htc"
