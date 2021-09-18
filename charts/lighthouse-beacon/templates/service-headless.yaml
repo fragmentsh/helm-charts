@@ -4,14 +4,8 @@ metadata:
   name: {{ if .Values.serviceName }}{{ .Values.serviceName }}{{ else }}{{ include "lighthouse-beacon.fullname" . }}{{ end }}
   labels:
     {{- include "lighthouse-beacon.labels" . | nindent 4 }}
-{{- if .Values.service.annotations }}
-  annotations:
-{{ toYaml .Values.service.annotations | indent 4 }}
-{{- end }}
 spec:
-  type: ClusterIP
   clusterIP: None
-  publishNotReadyAddresses: true
   ports:
     - port: 5052
       name: http
