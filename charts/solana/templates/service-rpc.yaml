@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "solana.fullname" . }}-rpc
+  labels:
+    {{- include "solana.labels" . | nindent 4 }}
+spec:
+  ports:
+    - port: 5052
+      name: http
+      targetPort: http
+      protocol: TCP
+  selector:
+    {{- include "solana.selectorLabels" . | nindent 4 }}
