@@ -4,7 +4,7 @@ description: A Helm chart for Lighthouse Ethereum 2 beacon chain client
 sources:
   - https://github.com/sigp/lighthouse
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "v1.5.2"
 maintainers:
   - name: fragment
