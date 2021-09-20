@@ -7,7 +7,7 @@ replicaCount: 1
 podManagementPolicy: Parallel
 
 image:
-  repository: sigp/lighthouse
+  repository: solanalabs/solana
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -17,8 +17,6 @@ updateStrategyType: RollingUpdate
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-serviceName: ""
-dnsDomain: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -28,6 +26,9 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+
+solana:
+  cluster: testnet
 
 podAnnotations: {}
 
@@ -54,13 +55,6 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
 nodeSelector: {}
   #  role: ethereum-public
 
@@ -72,25 +66,16 @@ tolerations: []
 
 affinity: {}
 
-config:
-  datadir: /data
-
 extraArgs: {}
-
-service:
-  p2p:
-    enableHostPort: true
-    tcp:
-      port: 10000
-    udp:
-      port: 10001
 
 persistence:
   enabled: true
-  accessMode: ReadWriteOnce
-  # storageClass: ""
-  # existingClaim: ""
-  size: 50Gi
+  ledger:
+    existingClaim: solana-accounts
+  accounts:
+    existingClaim: solana-ledger
+  config:
+    existingClaim: solana-config
 
 serviceMonitor:
   enabled: false

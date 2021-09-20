@@ -1,0 +1,9 @@
+tolerations:
+  - key: "dedicated"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+nodeSelector:
+  arch: amd64
+  network: public
+  size: c5.2xlarge

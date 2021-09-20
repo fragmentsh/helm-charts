@@ -6,9 +6,9 @@ metadata:
     {{- include "solana.labels" . | nindent 4 }}
 spec:
   ports:
-    - port: 5052
-      name: http
-      targetPort: http
+    - port: 8899
+      name: rpc
+      targetPort: rpc
       protocol: TCP
   selector:
     {{- include "solana.selectorLabels" . | nindent 4 }}

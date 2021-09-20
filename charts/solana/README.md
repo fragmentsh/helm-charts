@@ -1,8 +1,8 @@
 # solana
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.5.2](https://img.shields.io/badge/AppVersion-v1.5.2-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.7.12](https://img.shields.io/badge/AppVersion-v1.7.12-informational?style=flat-square)
 
-A Helm chart for Lighthouse Ethereum 2 beacon chain client
+A Helm chart for Solana
 
 ## Maintainers
 
@@ -12,39 +12,31 @@ A Helm chart for Lighthouse Ethereum 2 beacon chain client
 
 ## Source Code
 
-* <https://github.com/sigp/lighthouse>
+* <https://docs.solana.com/>
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| autoscaling.enabled | bool | `false` |  |
-| autoscaling.maxReplicas | int | `100` |  |
-| autoscaling.minReplicas | int | `1` |  |
-| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| config.datadir | string | `"/data"` |  |
-| dnsDomain | string | `""` |  |
 | extraArgs | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"sigp/lighthouse"` |  |
+| image.repository | string | `"solanalabs/solana"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
-| persistence.accessMode | string | `"ReadWriteOnce"` |  |
+| persistence.accounts.existingClaim | string | `"solana-ledger"` |  |
+| persistence.config.existingClaim | string | `"solana-config"` |  |
 | persistence.enabled | bool | `true` |  |
-| persistence.size | string | `"50Gi"` |  |
+| persistence.ledger.existingClaim | string | `"solana-accounts"` |  |
 | podAnnotations | object | `{}` |  |
 | podManagementPolicy | string | `"Parallel"` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
-| service.p2p.enableHostPort | bool | `true` |  |
-| service.p2p.tcp.port | int | `10000` |  |
-| service.p2p.udp.port | int | `10001` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
@@ -55,7 +47,7 @@ A Helm chart for Lighthouse Ethereum 2 beacon chain client
 | serviceMonitor.namespaceSelector | object | `{}` |  |
 | serviceMonitor.scrapeInterval | string | `"60s"` |  |
 | serviceMonitor.targetLabels | list | `[]` |  |
-| serviceName | string | `""` |  |
+| solana.cluster | string | `"testnet"` |  |
 | tolerations | list | `[]` |  |
 | updateStrategyType | string | `"RollingUpdate"` |  |
 
