@@ -125,3 +125,4 @@ serviceMonitor:
   # honorLabels: true
   targetLabels: []
   metricRelabelings: []
+  path: /debug/metrics/prometheus

@@ -1,6 +1,6 @@
 # geth
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: alltools-v1.10.8](https://img.shields.io/badge/AppVersion-alltools--v1.10.8-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: alltools-v1.10.8](https://img.shields.io/badge/AppVersion-alltools--v1.10.8-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -69,6 +69,7 @@ A Helm chart for Kubernetes
 | serviceMonitor.metricRelabelings | list | `[]` |  |
 | serviceMonitor.namespace | string | `""` |  |
 | serviceMonitor.namespaceSelector | object | `{}` |  |
+| serviceMonitor.path | string | `"/debug/metrics/prometheus"` |  |
 | serviceMonitor.scrapeInterval | string | `"60s"` |  |
 | serviceMonitor.targetLabels | list | `[]` |  |
 | tolerations | list | `[]` |  |
