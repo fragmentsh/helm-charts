@@ -1,6 +1,6 @@
 # ssv-node
 
-![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.0.20](https://img.shields.io/badge/AppVersion-v0.0.20-informational?style=flat-square)
+![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.0.20](https://img.shields.io/badge/AppVersion-v0.0.20-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -23,11 +23,11 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| config.LogFormat | string | `"json"` |  |
-| config.LogLevelFormat | string | `"lowercase"` |  |
 | config.MetricsAPIPort | int | `15000` |  |
 | config.db.Path | string | `"/data"` |  |
+| config.global.LogFormat | string | `"json"` |  |
 | config.global.LogLevel | string | `"info"` |  |
+| config.global.LogLevelFormat | string | `"lowercase"` |  |
 | dnsDomain | string | `""` |  |
 | extraArgs | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
