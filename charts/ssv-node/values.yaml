@@ -28,6 +28,8 @@ config:
   MetricsAPIPort: 15000
   db:
     Path: "/data"
+  LogFormat: json
+  LogLevelFormat: lowercase
 
 serviceAccount:
   # Specifies whether a service account should be created
