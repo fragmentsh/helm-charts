@@ -33,7 +33,7 @@ podSecurityContext: {}
 service:
   peering:
     port: 20000
-    enableHostPort: false
+    enableHostPort: true
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -68,7 +68,6 @@ defaultArgs:
   ws.addr: 0.0.0.0
   ws.api: "eth,net,web3"
   ws.origins: '*'
-  # config: "/shared/config.toml"
 
 extraArgs: {}
 
@@ -126,3 +125,22 @@ serviceMonitor:
   targetLabels: []
   metricRelabelings: []
   path: /debug/metrics/prometheus
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http-rpc
+    httpHeaders:
+      - name:  Content-Type
+        value: application/json
+  initialDelaySeconds: 10
+
+readinessProbe:
+  exec:
+    command:
+    - /probes/readiness.sh
+  timeoutSeconds: 20
+  periodSeconds: 60
+  initialDelaySeconds: 60
+
+startupProbe: {}

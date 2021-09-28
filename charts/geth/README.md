@@ -1,6 +1,6 @@
 # geth
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: alltools-v1.10.8](https://img.shields.io/badge/AppVersion-alltools--v1.10.8-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: alltools-v1.10.8](https://img.shields.io/badge/AppVersion-alltools--v1.10.8-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -49,6 +49,11 @@ A Helm chart for Kubernetes
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
+| livenessProbe.httpGet.httpHeaders[0].name | string | `"Content-Type"` |  |
+| livenessProbe.httpGet.httpHeaders[0].value | string | `"application/json"` |  |
+| livenessProbe.httpGet.path | string | `"/"` |  |
+| livenessProbe.httpGet.port | string | `"http-rpc"` |  |
+| livenessProbe.initialDelaySeconds | int | `10` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | persistence.accessMode | string | `"ReadWriteOnce"` |  |
@@ -56,10 +61,14 @@ A Helm chart for Kubernetes
 | persistence.size | string | `"1Ti"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| readinessProbe.exec.command[0] | string | `"/probes/readiness.sh"` |  |
+| readinessProbe.initialDelaySeconds | int | `60` |  |
+| readinessProbe.periodSeconds | int | `60` |  |
+| readinessProbe.timeoutSeconds | int | `20` |  |
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | string | `nil` |  |
-| service.peering.enableHostPort | bool | `false` |  |
+| service.peering.enableHostPort | bool | `true` |  |
 | service.peering.port | int | `20000` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
@@ -72,6 +81,7 @@ A Helm chart for Kubernetes
 | serviceMonitor.path | string | `"/debug/metrics/prometheus"` |  |
 | serviceMonitor.scrapeInterval | string | `"60s"` |  |
 | serviceMonitor.targetLabels | list | `[]` |  |
+| startupProbe | object | `{}` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------
