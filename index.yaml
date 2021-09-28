@@ -34,6 +34,21 @@ entries:
   geth:
   - apiVersion: v2
     appVersion: alltools-v1.10.8
+    created: "2021-09-28T22:15:00.653277437Z"
+    description: A Helm chart for Kubernetes
+    digest: 97ab5d9ee9dd4802de3e959d8f3a9c6b3308a6c060727d4257506dfe73c853a8
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: geth
+    sources:
+    - https://geth.ethereum.org/downloads/
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-geth-1.1.0/geth-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: alltools-v1.10.8
     created: "2021-09-22T20:37:37.10040264Z"
     description: A Helm chart for Kubernetes
     digest: dfe128ef7ef0bf4de5b2a7d72f0d2b25614f58c597dfccb53a190f5de9641100
@@ -231,4 +246,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.0.1/ssv-node-1.0.1.tgz
     version: 1.0.1
-generated: "2021-09-24T15:38:40.098836443Z"
+generated: "2021-09-28T22:15:00.653304937Z"
