@@ -2,6 +2,21 @@ apiVersion: v1
 entries:
   erigon:
   - apiVersion: v2
+    appVersion: v2021.09.04
+    created: "2021-09-29T19:41:41.53808648Z"
+    description: A Helm chart for Erigon Ethereum 1 client
+    digest: 661a61001eb30fa44e786bc9ac47a13ffe212f7d10de880d12dba074668507ac
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: erigon
+    sources:
+    - https://github.com/ledgerwatch/erigon
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-erigon-2.1.0/erigon-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
     appVersion: v2021.09.03
     created: "2021-09-18T17:45:54.226918752Z"
     description: A Helm chart for Erigon Ethereum 1 client
@@ -246,4 +261,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.0.1/ssv-node-1.0.1.tgz
     version: 1.0.1
-generated: "2021-09-28T22:15:00.653304937Z"
+generated: "2021-09-29T19:41:41.538124881Z"
