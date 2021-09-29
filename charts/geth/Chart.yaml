@@ -4,8 +4,8 @@ description: A Helm chart for Kubernetes
 sources:
   - https://geth.ethereum.org/downloads/
 type: application
-version: 1.1.0
-appVersion: "alltools-v1.10.8"
+version: 1.2.0
+appVersion: "v1.10.9"
 maintainers:
   - name: fragment
     email: contact@fragment.sh
