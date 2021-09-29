@@ -15,6 +15,7 @@ on:
 env:
   CT_CHART_DIRS: charts
   CT_TARGET_BRANCH: main
+  HELM_VERSION: ${{ secrets.HELM_VERSION }}
 
 jobs:
   lint-test:
@@ -28,7 +29,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.6.3
+          version: ${{ secrets.HELM_VERSION }}
 
       - uses: actions/setup-python@v2
         with:
