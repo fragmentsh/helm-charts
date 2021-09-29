@@ -1,3 +1,7 @@
 erigon:
   extraArgs:
-    prune: "htc"
+    prune: "hrtc"
+    prune.h.before: "11052984"
+    prune.r.before: "11052984"
+    prune.t.before: "11052984"
+    prune.c.before: "11052984"
