@@ -5,7 +5,7 @@ sources:
   - https://docs.solana.com/
 type: application
 version: 1.0.0
-appVersion: "v1.7.12"
+appVersion: "v1.7.13"
 maintainers:
   - name: fragment
     email: contact@fragment.sh

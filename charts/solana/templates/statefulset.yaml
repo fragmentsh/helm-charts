@@ -184,18 +184,6 @@ spec:
         - name: config
           emptyDir: {}
   {{- else }}
-#        - name: ledger
-#          hostPath:
-#            path: /data/solana/ledger
-#            type: Directory
-#        - name: accounts
-#          hostPath:
-#            path: /data/solana/accounts
-#            type: Directory
-#        - name: config
-#          hostPath:
-#            path: /data/solana/config
-#            type: Directory
         - name: ledger
           persistentVolumeClaim:
             {{- with .Values.persistence.ledger.existingClaim }}
