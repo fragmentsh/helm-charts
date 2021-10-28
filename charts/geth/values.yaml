@@ -149,4 +149,12 @@ readinessProbe:
   # periodSeconds: 60
   # initialDelaySeconds: 60
 
-startupProbe: {}
+startupProbe:
+  httpGet:
+    path: /
+    port: http-rpc
+    httpHeaders:
+    - name: Content-Type
+      value: application/json
+  failureThreshold: 30
+  periodSeconds: 10

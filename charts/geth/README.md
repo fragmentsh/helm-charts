@@ -1,6 +1,6 @@
 # geth
 
-![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.11](https://img.shields.io/badge/AppVersion-v1.10.11-informational?style=flat-square)
+![Version: 1.2.3](https://img.shields.io/badge/Version-1.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.11](https://img.shields.io/badge/AppVersion-v1.10.11-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -81,7 +81,12 @@ A Helm chart for Kubernetes
 | serviceMonitor.path | string | `"/debug/metrics/prometheus"` |  |
 | serviceMonitor.scrapeInterval | string | `"60s"` |  |
 | serviceMonitor.targetLabels | list | `[]` |  |
-| startupProbe | object | `{}` |  |
+| startupProbe.failureThreshold | int | `30` |  |
+| startupProbe.httpGet.httpHeaders[0].name | string | `"Content-Type"` |  |
+| startupProbe.httpGet.httpHeaders[0].value | string | `"application/json"` |  |
+| startupProbe.httpGet.path | string | `"/"` |  |
+| startupProbe.httpGet.port | string | `"http-rpc"` |  |
+| startupProbe.periodSeconds | int | `10` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------
