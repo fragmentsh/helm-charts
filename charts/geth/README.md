@@ -1,6 +1,6 @@
 # geth
 
-![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.11](https://img.shields.io/badge/AppVersion-v1.10.11-informational?style=flat-square)
+![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.11](https://img.shields.io/badge/AppVersion-v1.10.11-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -61,10 +61,10 @@ A Helm chart for Kubernetes
 | persistence.size | string | `"1Ti"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| readinessProbe.exec.command[0] | string | `"/probes/readiness.sh"` |  |
-| readinessProbe.initialDelaySeconds | int | `60` |  |
-| readinessProbe.periodSeconds | int | `60` |  |
-| readinessProbe.timeoutSeconds | int | `20` |  |
+| readinessProbe.httpGet.httpHeaders[0].name | string | `"Content-Type"` |  |
+| readinessProbe.httpGet.httpHeaders[0].value | string | `"application/json"` |  |
+| readinessProbe.httpGet.path | string | `"/"` |  |
+| readinessProbe.httpGet.port | string | `"http-rpc"` |  |
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | string | `nil` |  |

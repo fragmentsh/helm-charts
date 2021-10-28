@@ -136,11 +136,17 @@ livenessProbe:
   initialDelaySeconds: 10
 
 readinessProbe:
-  exec:
-    command:
-    - /probes/readiness.sh
-  timeoutSeconds: 20
-  periodSeconds: 60
-  initialDelaySeconds: 60
+  httpGet:
+    path: /
+    port: http-rpc
+    httpHeaders:
+    - name: Content-Type
+      value: application/json
+  # exec:
+  #   command:
+  #   - /probes/readiness.sh
+  # timeoutSeconds: 20
+  # periodSeconds: 60
+  # initialDelaySeconds: 60
 
 startupProbe: {}
