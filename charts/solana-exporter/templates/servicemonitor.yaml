@@ -2,12 +2,12 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "ssv-node.fullname" . }}
+  name: {{ include "solana-exporter.fullname" . }}
 {{- if .Values.serviceMonitor.namespace }}
   namespace: {{ .Values.serviceMonitor.namespace | quote }}
 {{- end }}
   labels:
-    {{- include "ssv-node.labels" . | nindent 4 }}
+    {{- include "solana-exporter.labels" . | nindent 4 }}
   {{- if .Values.serviceMonitor.additionalLabels }}
     {{- toYaml .Values.serviceMonitor.additionalLabels | nindent 4 }}
   {{- end }}
@@ -36,5 +36,5 @@ spec:
 {{- end }}
   selector:
     matchLabels:
-      {{- include "ssv-node.selectorLabels" . | nindent 6 }}
+      {{- include "solana-exporter.selectorLabels" . | nindent 6 }}
 {{- end }}

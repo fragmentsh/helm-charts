@@ -1,25 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ if .Values.serviceName }}{{ .Values.serviceName }}{{ else }}{{ include "ssv-node.fullname" . }}{{ end }}
+  name: {{ if .Values.serviceName }}{{ .Values.serviceName }}{{ else }}{{ include "solana-exporter.fullname" . }}{{ end }}
   labels:
-    {{- include "ssv-node.labels" . | nindent 4 }}
-{{- if .Values.service.annotations }}
-  annotations:
-{{ toYaml .Values.service.annotations | indent 4 }}
-{{- end }}
+    {{- include "solana-exporter.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
-  publishNotReadyAddresses: true
   clusterIP: None
   ports:
-    - port: {{ .Values.service.peering.udp.port }}
-      name: peering-udp
-      targetPort: peering-udp
-      protocol: UDP
-    - port: {{ .Values.service.peering.tcp.port }}
-      name: peering-tcp
-      targetPort: peering-tcp
+    - port: 9179
+      name: metrics
+      targetPort: metrics
       protocol: TCP
   selector:
-    {{- include "ssv-node.selectorLabels" . | nindent 4 }}
+    {{- include "solana-exporter.selectorLabels" . | nindent 4 }}

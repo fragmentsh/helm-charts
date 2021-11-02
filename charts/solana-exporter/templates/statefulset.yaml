@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "ssv-node.fullname" . }}
+  name: {{ include "solana-exporter.fullname" . }}
   labels:
-    {{- include "ssv-node.labels" . | nindent 4 }}
+    {{- include "solana-exporter.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ if .Values.serviceName }}{{ .Values.serviceName }}{{ else }}{{ include "ssv-node.fullname" . }}{{ end }}
+  serviceName: {{ if .Values.serviceName }}{{ .Values.serviceName }}{{ else }}{{ include "solana-exporter.fullname" . }}{{ end }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
@@ -17,7 +17,7 @@ spec:
     {{- end }}
   selector:
     matchLabels:
-      {{- include "ssv-node.selectorLabels" . | nindent 6 }}
+      {{- include "solana-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -25,14 +25,14 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "ssv-node.selectorLabels" . | nindent 8 }}
+        {{- include "solana-exporter.selectorLabels" . | nindent 8 }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum | trunc 63 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "ssv-node.serviceAccountName" . }}
+      serviceAccountName: {{ include "solana-exporter.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -42,25 +42,29 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - mountPath: {{ .Values.config.db.Path }}
+            - mountPath: /exporter/persistent.db
               name: data
-            - mountPath: /init/config.yaml
+            - mountPath: /etc/solana-exporter/config.toml
               name: config
-              subPath: config.yaml
+              subPath: config.toml
+            - mountPath: /entrypoint/entrypoint.sh
+              name: config
+              subPath: entrypoint.sh
           {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
           {{- end }}
           env:
-            - name: CONFIG_PATH
-              value: "./init/config.yaml"
           {{- if .Values.extraEnvs }}
             {{- toYaml .Values.extraEnvs | nindent 12 }}
           {{- end }}
           command:
-            - make
-            - BUILD_PATH=/go/bin/ssvnode
-            - start-node
+            - /entrypoint/entrypoint.sh
           args:
+            - ./solana-exporter
+            - -c
+            - /etc/solana-exporter/config.toml
+            - -d
+            - /exporter/persistent.db
           {{- range $key, $value := .Values.extraArgs }}
             {{- /* Accept keys without values or with false as value */}}
             {{- if eq ($value | quote | len) 2 }}
@@ -71,19 +75,7 @@ spec:
           {{- end }}
           ports:
             - name: metrics
-              containerPort: {{ .Values.config.MetricsAPIPort }}
-            - name: peering-tcp
-              containerPort: {{ .Values.service.peering.tcp.port }}
-              protocol: TCP
-            {{- if .Values.service.peering.enableHostPort }}
-              hostPort: {{ .Values.service.peering.tcp.port }}
-            {{- end }}
-            - name: peering-udp
-              containerPort: {{ .Values.service.peering.udp.port }}
-              protocol: UDP
-            {{- if .Values.service.peering.enableHostPort }}
-              hostPort: {{ .Values.service.peering.udp.port }}
-            {{- end }}
+              containerPort: 9179
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -101,7 +93,8 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "ssv-node.fullname" . }}-config
+            name: {{ include "solana-exporter.fullname" . }}-config
+            defaultMode: 0770
       {{- if .Values.extraVolumes }}
         {{ toYaml .Values.extraVolumes | nindent 8 }}
       {{- end }}
@@ -119,7 +112,7 @@ spec:
     - metadata:
         name: data
         labels:
-          {{- include "ssv-node.selectorLabels" . | nindent 10 }}
+          {{- include "solana-exporter.selectorLabels" . | nindent 10 }}
       spec:
         accessModes:
           - {{ .Values.persistence.accessMode | quote }}

@@ -1,8 +1,8 @@
-# ssv-node
+# solana-exporter
 
-![Version: 1.4.0](https://img.shields.io/badge/Version-1.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.3](https://img.shields.io/badge/AppVersion-v0.1.3-informational?style=flat-square)
+![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.1](https://img.shields.io/badge/AppVersion-0.4.1-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+A Helm chart for Solana Exporter
 
 ## Maintainers
 
@@ -12,7 +12,7 @@ A Helm chart for Kubernetes
 
 ## Source Code
 
-* <https://github.com/bloxapp/ssv>
+* <https://docs.rs/crate/solana-exporter>
 
 ## Values
 
@@ -23,16 +23,12 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| config.MetricsAPIPort | int | `15000` |  |
-| config.db.Path | string | `"/data"` |  |
-| config.global.LogFormat | string | `"json"` |  |
-| config.global.LogLevel | string | `"info"` |  |
-| config.global.LogLevelFormat | string | `"lowercase"` |  |
-| dnsDomain | string | `""` |  |
+| autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
+| config | string | `"rpc = 'https://api.mainnet-beta.solana.com/'\ntarget = '0.0.0.0:9179'\nvote_account_whitelist = []\nstaking_account_whitelist = []"` |  |
 | extraArgs | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"bloxstaking/ssv-node"` |  |
+| image.repository | string | `"rustiq/solana-exporter"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
@@ -46,9 +42,6 @@ A Helm chart for Kubernetes
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
-| service.peering.enableHostPort | bool | `true` |  |
-| service.peering.tcp.port | int | `13000` |  |
-| service.peering.udp.port | int | `12000` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |

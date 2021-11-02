@@ -1,4 +1,4 @@
-# Default values for ssv-node.
+# Default values for solana-exporter.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,7 +7,7 @@ replicaCount: 1
 podManagementPolicy: Parallel
 
 image:
-  repository: bloxstaking/ssv-node
+  repository: rustiq/solana-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -18,18 +18,14 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 serviceName: ""
-dnsDomain: ""
 
 extraArgs: {}
 
-config:
-  global:
-    LogLevel: "info"
-    LogFormat: json
-    LogLevelFormat: lowercase
-  MetricsAPIPort: 15000
-  db:
-    Path: "/data"
+config: |-
+  rpc = 'https://api.mainnet-beta.solana.com/'
+  target = '0.0.0.0:9179'
+  vote_account_whitelist = []
+  staking_account_whitelist = []
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -52,14 +48,6 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
-service:
-  peering:
-    enableHostPort: true
-    tcp:
-      port: 13000
-    udp:
-      port: 12000
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -110,4 +98,4 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
