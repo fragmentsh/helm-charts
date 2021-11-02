@@ -1,0 +1,11 @@
+apiVersion: v2
+name: solana-exporter
+description: A Helm chart for Solana Exporter
+sources:
+  - https://docs.rs/crate/solana-exporter
+type: application
+version: 0.0.1
+appVersion: "0.4.1"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh
