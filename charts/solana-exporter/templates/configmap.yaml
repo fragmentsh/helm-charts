@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ssv-node.fullname" . }}-config
+  labels:
+    {{- include "ssv-node.labels" . | nindent 4 }}
+data:
+  config.yaml: |-
+  {{- toYaml .Values.config | nindent 4 }}
