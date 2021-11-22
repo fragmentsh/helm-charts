@@ -1,13 +1,20 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "web3signer.fullname" . }}
   labels:
     {{- include "web3signer.labels" . | nindent 4 }}
 spec:
+  serviceName: {{ include "web3signer.fullname" . }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+  podManagementPolicy: {{ .Values.podManagementPolicy }}
+  updateStrategy:
+    type: {{ .Values.updateStrategyType }}
+    {{- if (eq "OnDelete" .Values.updateStrategyType) }}
+    rollingUpdate: null
+    {{- end }}
   selector:
     matchLabels:
       {{- include "web3signer.selectorLabels" . | nindent 6 }}
