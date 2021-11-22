@@ -1,0 +1,11 @@
+apiVersion: v2
+name: web3signer
+description: A Helm chart for Consensys web3signer
+type: application
+sources:
+  - https://github.com/ConsenSys/teku
+version: 0.1.0
+appVersion: "21.10.0"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh

@@ -1,0 +1,11 @@
+apiVersion: v2
+name: teku-validator
+description: A Helm chart for Teku Ethereum 2.0 Beacon Chain
+sources:
+  - https://github.com/ConsenSys/teku
+type: application
+version: 0.0.1
+appVersion: "21.11.1-jdk17"
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh
