@@ -472,4 +472,36 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.0.1/ssv-node-1.0.1.tgz
     version: 1.0.1
-generated: "2021-11-04T07:18:22.261576116Z"
+  teku-validator:
+  - apiVersion: v2
+    appVersion: 21.11.1-jdk17
+    created: "2021-11-22T01:39:30.679954592Z"
+    description: A Helm chart for Teku Ethereum 2.0 Beacon Chain
+    digest: c1988a94586f67da1c693196ea9ee7449d0d9aa59c3cd7101244a1c977c4b561
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: teku-validator
+    sources:
+    - https://github.com/ConsenSys/teku
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-teku-validator-0.0.1/teku-validator-0.0.1.tgz
+    version: 0.0.1
+  web3signer:
+  - apiVersion: v2
+    appVersion: 21.10.0
+    created: "2021-11-22T01:39:30.863263297Z"
+    description: A Helm chart for Consensys web3signer
+    digest: 65c8609d0000ef354f5c09c8d63f0e8f09763e4fc5ea3033ddf66235d9197a38
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: web3signer
+    sources:
+    - https://github.com/ConsenSys/teku
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-web3signer-0.1.0/web3signer-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-11-22T01:39:30.863335496Z"
