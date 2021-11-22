@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keystores
+  namespace: ethereum
+stringData:
+  9-ade67a1166ca034c71729a653cac36971d57417e737491d0fbce625f5ce59a87c6dd7ae59a226fc1b7de360eb27bb586.yaml: |-
+    type: "file-keystore"
+    keystoreFile: "9-ade67a1166ca034c71729a653cac36971d57417e737491d0fbce625f5ce59a87c6dd7ae59a226fc1b7de360eb27bb586.json"
+    keystorePasswordFile: "9-ade67a1166ca034c71729a653cac36971d57417e737491d0fbce625f5ce59a87c6dd7ae59a226fc1b7de360eb27bb586.password"
+  9-ade67a1166ca034c71729a653cac36971d57417e737491d0fbce625f5ce59a87c6dd7ae59a226fc1b7de360eb27bb586.json: |-
+    {"crypto":{"kdf":{"function":"scrypt","params":{"dklen":32,"n":262144,"r":8,"p":1,"salt":"b3ed836d36cde4e9752ca96ded74c2caa1d0c641106ae9967a289b12cd996afd"},"message":""},"checksum":{"function":"sha256","params":{},"message":"7226fe57fdcf0b6bdcff515c110aa1d24e99bb58ae9e075c0d54a9279e65b648"},"cipher":{"function":"aes-128-ctr","params":{"iv":"ad2e46d996cae1764e187b5e94e07d5d"},"message":"5c00e82b9a2928c9d3c20d3e880fbff030baa35d64138229974fb82178aee560"}},"description":"","pubkey":"ade67a1166ca034c71729a653cac36971d57417e737491d0fbce625f5ce59a87c6dd7ae59a226fc1b7de360eb27bb586","path":"m/12381/3600/9/0/0","uuid":"5c0cb237-addd-4315-a42f-fcb1108ca15d","version":4}
+  9-ade67a1166ca034c71729a653cac36971d57417e737491d0fbce625f5ce59a87c6dd7ae59a226fc1b7de360eb27bb586.password: |-
+    `gAt-x!nB3$u#hJkPe}`Re^Q
