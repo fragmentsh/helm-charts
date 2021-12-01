@@ -4,8 +4,8 @@ description: A Helm chart for Erigon Ethereum 1 client
 sources:
   - https://github.com/ledgerwatch/erigon
 type: application
-version: 2.2.0
-appVersion: "v2021.10.03"
+version: 2.3.0
+appVersion: "v2021.12.01"
 maintainers:
   - name: fragment
     email: contact@fragment.sh
