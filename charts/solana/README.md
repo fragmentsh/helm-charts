@@ -1,6 +1,6 @@
 # solana
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.7.13](https://img.shields.io/badge/AppVersion-v1.7.13-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.8.5](https://img.shields.io/badge/AppVersion-v1.8.5-informational?style=flat-square)
 
 A Helm chart for Solana
 
@@ -27,11 +27,17 @@ A Helm chart for Solana
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
-| persistence.accounts.existingClaim | string | `"solana-ledger"` |  |
-| persistence.config.existingClaim | string | `"solana-config"` |  |
+| persistence.accounts.accessMode | string | `"ReadWriteOnce"` |  |
+| persistence.accounts.enabled | bool | `true` |  |
+| persistence.accounts.size | string | `"500Gi"` |  |
+| persistence.config.accessMode | string | `"ReadWriteOnce"` |  |
+| persistence.config.enabled | bool | `true` |  |
+| persistence.config.size | string | `"1Gi"` |  |
 | persistence.enabled | bool | `true` |  |
-| persistence.ledger.existingClaim | string | `"solana-accounts"` |  |
-| podAnnotations | object | `{}` |  |
+| persistence.existingClaim.enabled | bool | `false` |  |
+| persistence.ledger.accessMode | string | `"ReadWriteOnce"` |  |
+| persistence.ledger.size | string | `"1Ti"` |  |
+| podAnnotations."kubectl.kubernetes.io/default-container" | string | `"solana"` |  |
 | podManagementPolicy | string | `"Parallel"` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `1` |  |
@@ -40,14 +46,9 @@ A Helm chart for Solana
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
-| serviceMonitor.additionalLabels | object | `{}` |  |
-| serviceMonitor.enabled | bool | `false` |  |
-| serviceMonitor.metricRelabelings | list | `[]` |  |
-| serviceMonitor.namespace | string | `""` |  |
-| serviceMonitor.namespaceSelector | object | `{}` |  |
-| serviceMonitor.scrapeInterval | string | `"60s"` |  |
-| serviceMonitor.targetLabels | list | `[]` |  |
-| solana.cluster | string | `"testnet"` |  |
+| solana.cluster | string | `"mainnet-beta"` |  |
+| solana.validatorKeypair | string | `""` |  |
+| solana.voteAccountKeypair | string | `""` |  |
 | tolerations | list | `[]` |  |
 | updateStrategyType | string | `"RollingUpdate"` |  |
 

@@ -28,12 +28,15 @@ serviceAccount:
   name: ""
 
 solana:
-  cluster: testnet
+  cluster: mainnet-beta
+  validatorKeypair: ""
+  voteAccountKeypair: ""
 
-podAnnotations: {}
+
+podAnnotations:
+  kubectl.kubernetes.io/default-container: "solana"
 
 podSecurityContext: {}
-  # fsGroup: 2000
 
 securityContext: {}
   # capabilities:
@@ -70,23 +73,22 @@ extraArgs: {}
 
 persistence:
   enabled: true
+  existingClaim:
+    enabled: false
   ledger:
-    existingClaim: solana-accounts
+    accessMode: ReadWriteOnce
+    # storageClass: ""
+    # existingClaim: ""
+    size: 1Ti
   accounts:
-    existingClaim: solana-ledger
+    enabled: true
+    accessMode: ReadWriteOnce
+    # storageClass: ""
+    # existingClaim: ""
+    size: 500Gi
   config:
-    existingClaim: solana-config
-
-serviceMonitor:
-  enabled: false
-  additionalLabels: {}
-  namespace: ""
-  namespaceSelector: {}
-  # Default: scrape .Release.Namespace only
-  # To scrape all, use the following:
-  # namespaceSelector:
-  #   any: true
-  scrapeInterval: 60s
-  # honorLabels: true
-  targetLabels: []
-  metricRelabelings: []
+    enabled: true
+    accessMode: ReadWriteOnce
+    # storageClass: ""
+    # existingClaim: ""
+    size: 1Gi

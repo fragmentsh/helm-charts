@@ -11,5 +11,9 @@ spec:
       name: rpc
       targetPort: rpc
       protocol: TCP
+    - port: 8890
+      name: rpc-ws
+      targetPort: rpc-ws
+      protocol: TCP
   selector:
     {{- include "solana.selectorLabels" . | nindent 4 }}

@@ -32,12 +32,36 @@ spec:
       serviceAccountName: {{ include "solana.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      hostPID: true
+      hostNetwork: true
       containers:
+        - name: {{ .Chart.Name }}-sys-tuner
+          securityContext:
+            privileged: true
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - solana-sys-tuner
+            - --user
+            - root
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- if eq .Values.solana.cluster "devnet" }}
+          - name: SOLANA_METRICS_CONFIG
+            value: "host=https://metrics.solana.com:8086,db=devnet,u=scratch_writer,p=topsecret"
+          {{- end }}
+          {{- if eq .Values.solana.cluster "testnet" }}
+          - name: SOLANA_METRICS_CONFIG
+            value: "host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea"
+          {{- end }}
+          {{- if eq .Values.solana.cluster "mainnet-beta" }}
+          - name: SOLANA_METRICS_CONFIG
+            value: "host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password"
+          {{- end }}
           volumeMounts:
             - mountPath: /ledger
               name: ledger
@@ -47,18 +71,47 @@ spec:
               name: config
             - mountPath: /entrypoint
               name: entrypoint
+            - mountPath: /keys
+              name: keys
           command:
             - /entrypoint/entrypoint.sh
           args:
             - solana-validator
             - --entrypoint=entrypoint.{{ .Values.solana.cluster }}.solana.com:8001
+            - --entrypoint=entrypoint2.{{ .Values.solana.cluster }}.solana.com:8001
+            - --entrypoint=entrypoint3.{{ .Values.solana.cluster }}.solana.com:8001
+            {{- if eq .Values.solana.cluster "mainnet-beta" }}
+            - --entrypoint=entrypoint4.{{ .Values.solana.cluster }}.solana.com:8001
+            - --entrypoint=entrypoint5.{{ .Values.solana.cluster }}.solana.com:8001
+            - --known-validator=7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2
+            - --known-validator=GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ
+            - --known-validator=DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ
+            - --known-validator=CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S
+            - --expected-genesis-hash=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d
+            {{- end }}
+            {{- if eq .Values.solana.cluster "testnet" }}
+            - --known-validator=5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on
+            - --known-validator=7XSY3MrYnK8vq693Rju17bbPkCN3Z7KvvfvJx4kdrsSY
+            - --known-validator=Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN
+            - --known-validator=9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv
+            - --expected-genesis-hash=4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY
+            {{- end }}
+            {{- if eq .Values.solana.cluster "devnet" }}
+            - --known-validator=dv1ZAGvdsz5hHLwWXsVnM94hWf1pjbKVau1QVkaMJ92
+            - --known-validator=dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV
+            - --known-validator=dv4ACNkpYPcE3aKmYDqZm9G5EB3J4MRoeE7WNDRBVJB
+            - --known-validator=dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS
+            - --expected-genesis-hash=EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG
+            {{- end }}
             - --rpc-port=8899
+            - --only-known-rpc
             - --dynamic-port-range=8000-8010
-            - --identity=/root/.config/solana/validator-keypair.json
-            - --vote-account=/root/.config/solana/vote-account-keypair.json
+            - --identity=/keys/validator-keypair.json
+            - --vote-account=/keys/vote-account-keypair.json
             - --accounts=/accounts
             - --ledger=/ledger
-            - --limit-ledger-size
+            - --limit-ledger-size=270000000
+            - --private-rpc
             - --log=-
           {{- range $key, $value := .Values.extraArgs }}
             {{- /* Accept keys without values or with false as value */}}
@@ -72,93 +125,78 @@ spec:
             - name: rpc
               containerPort: 8899
               protocol: TCP
-              hostPort: 8899
             - name: rpc-ws
               containerPort: 8900
               protocol: TCP
-              hostPort: 8900
             - name: dynamic-0-tcp
               containerPort: 8000
               protocol: TCP
-              hostPort: 8000
             - name: dynamic-1-tcp
               containerPort: 8001
               protocol: TCP
-              hostPort: 8001
             - name: dynamic-2-tcp
               containerPort: 8002
               protocol: TCP
-              hostPort: 8002
             - name: dynamic-3-tcp
               containerPort: 8003
               protocol: TCP
-              hostPort: 8003
             - name: dynamic-4-tcp
               containerPort: 8004
               protocol: TCP
-              hostPort: 8004
             - name: dynamic-5-tcp
               containerPort: 8005
               protocol: TCP
-              hostPort: 8005
             - name: dynamic-6-tcp
               containerPort: 8006
               protocol: TCP
-              hostPort: 8006
             - name: dynamic-7-tcp
               containerPort: 8007
               protocol: TCP
-              hostPort: 8007
             - name: dynamic-8-tcp
               containerPort: 8008
               protocol: TCP
-              hostPort: 8008
             - name: dynamic-9-tcp
               containerPort: 8009
               protocol: TCP
-              hostPort: 8009
             - name: dynamic-0-udp
               containerPort: 8000
               protocol: UDP
-              hostPort: 8000
             - name: dynamic-1-udp
               containerPort: 8001
               protocol: UDP
-              hostPort: 8001
             - name: dynamic-2-udp
               containerPort: 8002
               protocol: UDP
-              hostPort: 8002
             - name: dynamic-3-udp
               containerPort: 8003
               protocol: UDP
-              hostPort: 8003
             - name: dynamic-4-udp
               containerPort: 8004
               protocol: UDP
-              hostPort: 8004
             - name: dynamic-5-udp
               containerPort: 8005
               protocol: UDP
-              hostPort: 8005
             - name: dynamic-6-udp
               containerPort: 8006
               protocol: UDP
-              hostPort: 8006
             - name: dynamic-7-udp
               containerPort: 8007
               protocol: UDP
-              hostPort: 8007
             - name: dynamic-8-udp
               containerPort: 8008
               protocol: UDP
-              hostPort: 8008
             - name: dynamic-9-udp
               containerPort: 8009
               protocol: UDP
-              hostPort: 8009
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - solana-validator
+                  - --ledger=/ledger
+                  - wait-for-restart-window
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -172,6 +210,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
+        - name: keys
+          secret:
+            secretName: {{ include "solana.fullname" . }}-keys
         - name: entrypoint
           configMap:
             name: {{ include "solana.fullname" . }}-entrypoint
@@ -183,20 +224,73 @@ spec:
           emptyDir: {}
         - name: config
           emptyDir: {}
-  {{- else }}
+  {{- else if .Values.persistence.existingClaim.enabled }}
         - name: ledger
           persistentVolumeClaim:
-            {{- with .Values.persistence.ledger.existingClaim }}
+            {{- with .Values.persistence.existingClaim.ledger }}
             claimName: {{ tpl . $ }}
             {{- end }}
         - name: accounts
           persistentVolumeClaim:
-            {{- with .Values.persistence.accounts.existingClaim }}
+            {{- with .Values.persistence.existingClaim.accounts }}
             claimName: {{ tpl . $ }}
             {{- end }}
         - name: config
           persistentVolumeClaim:
-            {{- with .Values.persistence.config.existingClaim }}
+            {{- with .Values.persistence.existingClaim.config }}
             claimName: {{ tpl . $ }}
             {{- end }}
+  {{- else }}
+  volumeClaimTemplates:
+    - metadata:
+        name: ledger
+        labels:
+          {{- include "solana.selectorLabels" . | nindent 10 }}
+      spec:
+        accessModes:
+          - {{ .Values.persistence.ledger.accessMode | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.persistence.ledger.size | quote }}
+        {{- if .Values.persistence.ledger.storageClass }}
+        {{- if (eq "-" .Values.persistence.ledger.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: "{{ .Values.persistence.ledger.storageClass }}"
+        {{- end }}
+        {{- end }}
+    - metadata:
+        name: accounts
+        labels:
+          {{- include "solana.selectorLabels" . | nindent 10 }}
+      spec:
+        accessModes:
+          - {{ .Values.persistence.accounts.accessMode | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.persistence.accounts.size | quote }}
+        {{- if .Values.persistence.accounts.storageClass }}
+        {{- if (eq "-" .Values.persistence.accounts.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: "{{ .Values.persistence.accounts.storageClass }}"
+        {{- end }}
+        {{- end }}
+    - metadata:
+        name: config
+        labels:
+          {{- include "solana.selectorLabels" . | nindent 10 }}
+      spec:
+        accessModes:
+          - {{ .Values.persistence.config.accessMode | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.persistence.config.size | quote }}
+        {{- if .Values.persistence.config.storageClass }}
+        {{- if (eq "-" .Values.persistence.config.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: "{{ .Values.persistence.config.storageClass }}"
+        {{- end }}
+        {{- end }}
   {{- end }}
