@@ -335,6 +335,22 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-nethermind-1.0.0/nethermind-1.0.0.tgz
     version: 1.0.0
+  solana:
+  - apiVersion: v2
+    appVersion: v1.8.5
+    created: "2021-12-01T22:27:23.224248044Z"
+    description: A Helm chart for Solana
+    digest: eb88f2080b80a75974a486cd8a3a4118d0e80e9a97f3527b123aa1e1bfb73cca
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: solana
+    sources:
+    - https://docs.solana.com/
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-solana-1.0.0/solana-1.0.0.tgz
+    version: 1.0.0
   solana-exporter:
   - apiVersion: v2
     appVersion: 0.4.1
@@ -534,4 +550,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-web3signer-0.1.0/web3signer-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-25T10:01:50.303657502Z"
+generated: "2021-12-01T22:27:23.224582244Z"
