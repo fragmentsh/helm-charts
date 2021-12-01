@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "solana.fullname" . }}-entrypoint
+  labels:
+    {{- include "solana.labels" . | nindent 4 }}
+data:
+  entrypoint.sh: |-
+    #! /bin/bash
+
+    set -e
+
+    export DEBIAN_FRONTEND=noninteractive
+
+    apt update && apt -y install ca-certificates
+
+    solana config set --url https://api.{{ .Values.solana.cluster }}.solana.com
+
+    exec "$@"

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "solana.fullname" . }}
+  labels:
+    {{- include "solana.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  ports:
+    - port: 8899
+      name: rpc
+      targetPort: rpc
+      protocol: TCP
+    - port: 8890
+      name: rpc-ws
+      targetPort: rpc-ws
+      protocol: TCP
+  selector:
+    {{- include "solana.selectorLabels" . | nindent 4 }}
