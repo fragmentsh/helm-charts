@@ -75,6 +75,12 @@ spec:
             - name: metrics
               containerPort: 9001
               protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /upcheck
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /upcheck
