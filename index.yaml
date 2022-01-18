@@ -414,6 +414,21 @@ entries:
     version: 0.0.1
   ssv-node:
   - apiVersion: v2
+    appVersion: v0.1.9
+    created: "2022-01-18T11:03:57.229679257Z"
+    description: A Helm chart for Kubernetes
+    digest: 7aa4c72e0bba9704eb343c13b22f5c3d99174e6c9d536d31f39383bee5571c55
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: ssv-node
+    sources:
+    - https://github.com/bloxapp/ssv
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-ssv-node-1.7.1/ssv-node-1.7.1.tgz
+    version: 1.7.1
+  - apiVersion: v2
     appVersion: v0.1.7
     created: "2021-12-01T22:31:23.944399095Z"
     description: A Helm chart for Kubernetes
@@ -625,4 +640,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-web3signer-0.1.0/web3signer-0.1.0.tgz
     version: 0.1.0
-generated: "2021-12-04T21:06:39.460326808Z"
+generated: "2022-01-18T11:03:57.229777956Z"
