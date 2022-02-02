@@ -199,6 +199,21 @@ entries:
     version: 1.0.0
   lighthouse-beacon:
   - apiVersion: v2
+    appVersion: v2.1.2-modern
+    created: "2022-02-02T08:56:00.277165561Z"
+    description: A Helm chart for Lighthouse Ethereum 2 beacon chain client
+    digest: 9aa2f8f461bab618e643a086ddb1c12baffa010d1e2bbd68fb6a36d827483439
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: lighthouse-beacon
+    sources:
+    - https://github.com/sigp/lighthouse
+    type: application
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-lighthouse-beacon-1.2.0/lighthouse-beacon-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: v2.0.1
     created: "2021-10-28T08:04:32.256252559Z"
     description: A Helm chart for Lighthouse Ethereum 2 beacon chain client
@@ -640,4 +655,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-web3signer-0.1.0/web3signer-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-18T11:03:57.229777956Z"
+generated: "2022-02-02T08:56:00.277275963Z"
