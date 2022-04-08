@@ -1,8 +1,8 @@
-# ssv-node
+# teku-beacon
 
-![Version: 1.8.0](https://img.shields.io/badge/Version-1.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.10](https://img.shields.io/badge/AppVersion-v0.1.10-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 22.4.0-jdk17](https://img.shields.io/badge/AppVersion-22.4.0--jdk17-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+A Helm chart for Teku Ethereum 2.0 Beacon Chain
 
 ## Maintainers
 
@@ -12,7 +12,7 @@ A Helm chart for Kubernetes
 
 ## Source Code
 
-* <https://github.com/bloxapp/ssv>
+* <https://github.com/ConsenSys/teku>
 
 ## Values
 
@@ -23,32 +23,24 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| config.MetricsAPIPort | int | `15000` |  |
-| config.db.Path | string | `"/data"` |  |
-| config.global.LogFormat | string | `"json"` |  |
-| config.global.LogLevel | string | `"info"` |  |
-| config.global.LogLevelFormat | string | `"lowercase"` |  |
-| dnsDomain | string | `""` |  |
+| config | object | `{}` |  |
 | extraArgs | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"bloxstaking/ssv-node"` |  |
+| image.repository | string | `"consensys/teku"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | persistence.accessMode | string | `"ReadWriteOnce"` |  |
 | persistence.enabled | bool | `true` |  |
-| persistence.size | string | `"5Gi"` |  |
+| persistence.size | string | `"80Gi"` |  |
 | podAnnotations | object | `{}` |  |
 | podManagementPolicy | string | `"Parallel"` |  |
-| podSecurityContext | object | `{}` |  |
+| podSecurityContext.fsGroup | int | `1000` |  |
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
-| service.peering.enableHostPort | bool | `true` |  |
-| service.peering.tcp.port | int | `13000` |  |
-| service.peering.udp.port | int | `12000` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
@@ -59,7 +51,6 @@ A Helm chart for Kubernetes
 | serviceMonitor.namespaceSelector | object | `{}` |  |
 | serviceMonitor.scrapeInterval | string | `"60s"` |  |
 | serviceMonitor.targetLabels | list | `[]` |  |
-| serviceName | string | `""` |  |
 | tolerations | list | `[]` |  |
 | updateStrategyType | string | `"RollingUpdate"` |  |
 

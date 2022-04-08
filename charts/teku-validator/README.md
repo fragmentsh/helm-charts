@@ -1,6 +1,6 @@
 # teku-validator
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 21.11.1-jdk17](https://img.shields.io/badge/AppVersion-21.11.1--jdk17-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 22.4.0-jdk17](https://img.shields.io/badge/AppVersion-22.4.0--jdk17-informational?style=flat-square)
 
 A Helm chart for Teku Ethereum 2.0 Beacon Chain
 

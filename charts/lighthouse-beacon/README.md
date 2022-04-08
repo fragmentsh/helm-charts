@@ -1,6 +1,6 @@
 # lighthouse-beacon
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.1.2-modern](https://img.shields.io/badge/AppVersion-v2.1.2--modern-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.2.0-modern](https://img.shields.io/badge/AppVersion-v2.2.0--modern-informational?style=flat-square)
 
 A Helm chart for Lighthouse Ethereum 2 beacon chain client
 
