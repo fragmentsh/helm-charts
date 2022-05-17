@@ -3,6 +3,21 @@ entries:
   aptos:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2022-05-17T13:23:50.764421233Z"
+    description: Aptos blockchain node deployment
+    digest: bf3430fc1943dd4f6adb1c535ef573c2a81b624fb75d6c1ebd1a5272345d96b9
+    home: https://aptoslabs.com/
+    maintainers:
+    - email: contact@fragment.sh
+      name: fragment
+    name: aptos
+    sources:
+    - https://github.com/aptos-labs/aptos-core
+    urls:
+    - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-aptos-0.1.1/aptos-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2022-05-17T12:25:39.323507451Z"
     description: Aptos blockchain node deployment
     digest: d49924dd78cf1c22b4f12dac3a99f3ef3bd93937fd68b315810f0caf888a5214
@@ -807,4 +822,4 @@ entries:
     urls:
     - https://github.com/fragmentsh/helm-charts/releases/download/helm-chart-web3signer-0.1.0/web3signer-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-17T12:25:39.323614551Z"
+generated: "2022-05-17T13:23:50.764545033Z"
