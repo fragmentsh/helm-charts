@@ -1,0 +1,21 @@
+{{- range .Values.fullnode.groups }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aptos-validator.fullname" $ }}-{{ .name }}
+  labels:
+    {{- include "aptos-validator.labels" $ | nindent 4 }}
+spec:
+  selector:
+    {{- include "aptos-validator.selectorLabels" $ | nindent 4 }}
+    app.kubernetes.io/name: fullnode
+    group: {{ .name }}
+  ports:
+  - name: aptosnet
+    port: 6182
+  - name: metrics
+    port: 9101
+  - name: api
+    port: 8080
+{{- end }}
