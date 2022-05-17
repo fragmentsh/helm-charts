@@ -1,0 +1,11 @@
+apiVersion: v2
+name: aptos
+version: 0.1.0
+appVersion: 0.1.0
+description: Aptos blockchain node deployment
+home: https://aptoslabs.com/
+sources:
+- https://github.com/aptos-labs/aptos-core
+maintainers:
+  - name: fragment
+    email: contact@fragment.sh
