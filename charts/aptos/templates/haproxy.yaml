@@ -1,4 +1,103 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "aptos-validator.fullname" . }}-haproxy
+  labels:
+    {{- include "aptos-validator.labels" . | nindent 4 }}
+
 ---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "aptos-validator.fullname" . }}-haproxy
+  labels:
+    {{- include "aptos-validator.labels" . | nindent 4 }}
+data:
+  haproxy.cfg: |-
+{{ (tpl (.Files.Get "files/haproxy.cfg") .) | indent 4 }}
+  blocked.ips: ""
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aptos-validator.fullname" . }}-validator-lb
+  labels:
+    {{- include "aptos-validator.labels" . | nindent 4 }}
+  {{- with .Values.service.validator.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    {{- include "aptos-validator.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: haproxy
+  ports:
+  - name: validator
+    port: 6180
+  - name: metrics
+    port: 9101
+    targetPort: 9102
+  {{- if .Values.validator.exposeRestApi }}
+  - name: api
+    port: 80
+    targetPort: 8180
+  {{- end }}
+  type: {{ .Values.service.external.type }}
+  externalTrafficPolicy: Local
+  {{- with .Values.service.validator.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+{{- range $index, $config := $.Values.fullnode.groups }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aptos-validator.fullname" $ }}-{{ $config.name }}-lb
+  labels:
+    {{- include "aptos-validator.labels" $ | nindent 4 }}
+  {{- with (index $.Values.service $config.name).annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    {{- include "aptos-validator.selectorLabels" $ | nindent 4 }}
+    app.kubernetes.io/name: haproxy
+  ports:
+  - name: aptosnet
+    port: 6182
+    targetPort: {{ add 6182 $index }}
+  - name: metrics
+    port: 9101
+    targetPort: {{ add 9103 $index }}
+  {{- if $config.enableRestApi }}
+  - name: api
+    port: 80
+    targetPort: {{ add 8080 $index }}
+  {{- if $.Values.haproxy.tls_secret }}
+  - name: api-tls
+    port: 443
+    targetPort: {{ add 8443 $index }}
+  {{- end }}
+  {{- end }}
+  type: {{ $.Values.service.external.type }}
+  externalTrafficPolicy: Local
+  {{- with (index $.Values.service $config.name).loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+{{- end }}
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
