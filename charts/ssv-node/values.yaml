@@ -57,9 +57,9 @@ service:
   peering:
     enableHostPort: true
     tcp:
-      port: 13000
+      port: 13001
     udp:
-      port: 12000
+      port: 12001
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

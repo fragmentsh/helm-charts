@@ -4,8 +4,8 @@ description: A Helm chart for Kubernetes
 sources:
   - https://github.com/bloxapp/ssv
 type: application
-version: 1.8.0
-appVersion: "v0.1.10"
+version: 1.10.0
+appVersion: "v0.2.0"
 maintainers:
   - name: fragment
     email: contact@fragment.sh
